@@ -1,8 +1,8 @@
-import express, { Application } from 'express';
 import { config } from 'dotenv';
-import path from 'path';
+import express, { Application } from 'express';
 import { existsSync } from 'fs';
 import { Server } from 'http';
+import path from 'path';
 
 const loadEnvVars = (): any => {
   const defaultEnvPath = path.resolve(process.cwd(), '.env');
