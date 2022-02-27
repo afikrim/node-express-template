@@ -2,7 +2,7 @@
   "name": "express-template",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/cmd/http.js",
   "scripts": {
     "start": "node dist/cmd/http",
     "start:dev": "nodemon --watch './src/**/*.ts' --exec 'ts-node' src/cmd/http.ts",
