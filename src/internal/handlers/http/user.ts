@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { CreateUserDto, UpdateUserDto } from 'src/internal/core/domain/user';
-import { UserService } from 'src/internal/core/ports/services';
-import { User } from 'src/internal/repositories/user/entity';
+import { CreateUserDto, UpdateUserDto } from '../../core/domain/user';
+import { UserService } from '../../core/ports/services';
+import { User } from '../../repositories/user/entity';
 import { RequestParamsModel, RequestQueryModel } from './interfaces/request';
 import { ResponseModel } from './interfaces/response';
 

@@ -2,8 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "rootDir": "./",
-    "baseUrl": "./",
+    "rootDir": "./src",
     "typeRoots": ["./src/@types", "./node_modules/@types"],
     "sourceMap": true,
     "outDir": "./dist",
@@ -13,9 +12,6 @@
     "strict": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
-    "alwaysStrict": true,
-    "paths": {
-      "src/*": ["./src/*"]
-    }
+    "alwaysStrict": true
   }
 }

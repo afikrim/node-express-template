@@ -1,6 +1,6 @@
-import { UserRepository } from 'src/internal/core/ports/repositories';
-import { UserService } from 'src/internal/core/ports/services';
-import { User } from 'src/internal/repositories/user/entity';
+import { UserRepository } from '../../../core/ports/repositories';
+import { UserService } from '../../../core/ports/services';
+import { User } from '../../../repositories/user/entity';
 
 const create =
   (repository: UserRepository): UserService['create'] =>

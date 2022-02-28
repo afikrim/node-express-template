@@ -1,4 +1,4 @@
-import { User } from 'src/internal/repositories/user/entity';
+import { User } from '../../repositories/user/entity';
 import { CreateUserDto, UpdateUserDto } from '../domain/user';
 
 export type Cursor = {

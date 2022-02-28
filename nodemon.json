@@ -5,5 +5,5 @@
   "execMap": {
     "ts": "ts-node -r tsconfig-paths/register -P ./tsconfig.build.json"
   },
-  "watch": ["./src/**/*.ts", ".env", ".env.local"]
+  "watch": ["./src/**/*.ts", ".env", ".env.local", "tsconfig.json"]
 }

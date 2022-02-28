@@ -2,9 +2,9 @@ import { config } from 'dotenv';
 import express, { Application, json, urlencoded } from 'express';
 import { existsSync } from 'fs';
 import { Server } from 'http';
-import { newUserService } from 'src/internal/core/services/user/service';
-import { newUserHttpHandler } from 'src/internal/handlers/http/user';
-import { newUserRepository } from 'src/internal/repositories/user/repository';
+import { newUserService } from '../internal/core/services/user/service';
+import { newUserHttpHandler } from '../internal/handlers/http/user';
+import { newUserRepository } from '../internal/repositories/user/repository';
 import knex, { Knex } from 'knex';
 import path from 'path';
 

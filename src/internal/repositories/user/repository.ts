@@ -1,5 +1,5 @@
 import { hashSync, genSaltSync } from 'bcrypt';
-import { Cursor, UserRepository } from 'src/internal/core/ports/repositories';
+import { Cursor, UserRepository } from '../../core/ports/repositories';
 import { Knex } from 'knex';
 import { User } from './entity';
 
