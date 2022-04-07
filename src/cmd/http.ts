@@ -7,6 +7,8 @@ import { newUserHttpHandler } from '../internal/handlers/http/user';
 import { newUserRepository } from '../internal/repositories/user/repository';
 import knex, { Knex } from 'knex';
 import path from 'path';
+import { log } from '../pkg/logger';
+import { ERROR } from '../pkg/logger/constant';
 
 const loadEnvVars = (): Error | null => {
   const defaultEnvPath = path.resolve(process.cwd(), '.env');
@@ -15,10 +17,10 @@ const loadEnvVars = (): Error | null => {
   if (!existsSync(defaultEnvPath))
     return new Error('default env is not defined.');
 
-  console.log('Loading env variables from default .env path');
+  log('Loading env variables from default .env path', loadEnvVars.name);
   config({ path: defaultEnvPath });
   if (existsSync(localEnvPath)) {
-    console.log('Loading env variables from local .env path');
+    log('Loading env variables from local .env path', loadEnvVars.name);
     config({ path: localEnvPath });
   }
 
@@ -77,32 +79,32 @@ const main = (args: { knex: Knex }): Server => {
   const userService = newUserService(userRepository);
   const userHttpHandler = newUserHttpHandler(userService);
 
-  app.use(userHttpHandler.prefix, userHttpHandler.router);
+  app.use(userHttpHandler[0], userHttpHandler[1]);
 
   return app.listen(port);
 };
 
 const loadEnvError = loadEnvVars();
 if (loadEnvError) {
-  console.log('Server crashed: ' + loadEnvError.message);
-  console.log('Stack trace:\n' + loadEnvError.stack);
+  log('Server crashed: ' + loadEnvError.message, loadEnvVars.name, ERROR);
+  log('Stack trace:\n' + loadEnvError.stack, loadEnvVars.name, ERROR);
   process.exit(1);
 }
 const [knexConnection, initKnexError] = initKnex();
 if (initKnexError) {
-  console.log('Server crashed: ' + initKnexError.message);
-  console.log('Stack trace:\n' + initKnexError.stack);
+  log('Server crashed: ' + initKnexError.message, initKnex.name, ERROR);
+  log('Stack trace:\n' + initKnexError.stack, initKnex.name, ERROR);
   process.exit(1);
 }
 const server = main({ knex: knexConnection as Knex });
 
 server.on('listening', () => {
-  console.log('Server started at: :' + process.env.PORT || 3000);
+  log('Server started at: :' + (process.env.PORT || '3000'), main.name);
 });
 server.on('error', (err) => {
-  console.log('Server crashed: ' + err.message);
-  console.log('Stack trace:\n' + err.stack);
+  log('Server crashed: ' + err.message, main.name, ERROR);
+  log('Stack trace:\n' + err.stack, main.name, ERROR);
 });
 server.on('close', () => {
-  console.log('Closing server...');
+  log('Closing server...', main.name);
 });

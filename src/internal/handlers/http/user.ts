@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { routeMapping } from '../../../pkg/logger';
 import { CreateUserDto, UpdateUserDto } from '../../core/domain/user';
 import { UserService } from '../../core/ports/services';
 import { User } from '../../repositories/user/entity';
@@ -128,24 +129,16 @@ const remove =
       .send();
   };
 
-export const newUserHttpHandler = (
-  service: UserService,
-): { prefix: string; router: Router } => {
+export const newUserHttpHandler = (service: UserService): [string, Router] => {
   const prefix = '/users';
   const router = Router();
 
-  console.log('Start mapping routes from group: ' + prefix);
-
-  console.log(`Registering POST ${prefix}/`);
   router.post('/', create(service));
-  console.log(`Registering GET ${prefix}/`);
   router.get('/', findAll(service));
-  console.log(`Registering GET ${prefix}/:userid`);
   router.get('/:userid', findOne(service));
-  console.log(`Registering PATCH ${prefix}/:userid`);
   router.patch('/:userid', update(service));
-  console.log(`Registering DELETE ${prefix}/:userid`);
   router.delete('/:userid', remove(service));
 
-  return { prefix, router };
+  routeMapping(prefix, router);
+  return [prefix, router];
 };
