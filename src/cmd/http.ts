@@ -75,14 +75,15 @@ const main = (args: { knex: Knex }): Server => {
   app.use(urlencoded({ extended: true }));
   app.use(json());
 
-  // Registering docs as static path
-  app.use('/docs', express.static(path.resolve(process.cwd(), 'docs', 'out')));
-
   const userRepository = newUserRepository(args.knex);
   const userService = newUserService(userRepository);
   const userHttpHandler = newUserHttpHandler(userService);
 
   app.use(userHttpHandler[0], userHttpHandler[1]);
+
+  // Registering docs as static path
+  log('Registering documentations to /docs', main.name);
+  app.use('/docs', express.static(path.resolve(process.cwd(), 'docs', 'out')));
 
   return app.listen(port);
 };
