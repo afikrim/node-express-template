@@ -6,6 +6,43 @@ import { User } from '../../repositories/user/entity';
 import { RequestParamsModel, RequestQueryModel } from './interfaces/request';
 import { ResponseModel } from './interfaces/response';
 
+/**
+ * @api {post} /api/v1/users Create new user data
+ * @apiVersion 0.0.1
+ * @apiName CreateUser
+ * @apiGroup User
+ *
+ * @apiBody {String} name The new user name.
+ * @apiBody {String} email The new user email.
+ * @apiBody {String} password The new user password.
+ *
+ * @apiSuccess {Boolean} status Success status.
+ * @apiSuccess {String} message Response message.
+ * @apiSuccess {Object} data Response data.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 201 CREATED
+ *    {
+ *      "status": true,
+ *      "message": "Successfully create new user.",
+ *      "data": {}
+ *    }
+ *
+ * @apiError {Boolean} status Success status.
+ * @apiError {String} message Response message.
+ * @apiError {Object} data Errors data.
+ * @apiError {Object[]} data[errors]
+ *
+ * @apiErrorExample Error-Response:
+ *    HTTP/1.1 400 OK
+ *    {
+ *      "status": false,
+ *      "message": "Body doesn't match requirements.",
+ *      "data": {
+ *        "errors": []
+ *      }
+ *    }
+ */
 const create =
   (service: UserService) =>
   async (
@@ -26,6 +63,47 @@ const create =
       .send();
   };
 
+/**
+ * @api {get} /api/v1/users Get all users data
+ * @apiVersion 0.0.1
+ * @apiName GetAllUsers
+ * @apiGroup User
+ *
+ * @apiQuery {Number} limit=10
+ * @apiQuery {Number} offset=0
+ * @apiQuery {String} sortby=created_at
+ * @apiQuery {String="asc","desc"} orderby=asc
+ *
+ * @apiSuccess {Boolean} status Success status.
+ * @apiSuccess {String} message Response message.
+ * @apiSuccess {Object} data Response data.
+ * @apiSuccess {Object[]} data[users]
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "status": true,
+ *      "message": "Successfully get all users.",
+ *      "data": {
+ *        "users": []
+ *      }
+ *    }
+ *
+ * @apiError {Boolean} status Success status.
+ * @apiError {String} message Response message.
+ * @apiError {Object} data Errors data.
+ * @apiError {String[]} data[errors]
+ *
+ * @apiErrorExample Error-Response:
+ *    HTTP/1.1 400 OK
+ *    {
+ *      "status": false,
+ *      "message": "Params doesn't match requirements.",
+ *      "data": {
+ *        "errors": []
+ *      }
+ *    }
+ */
 const findAll =
   (service: UserService) =>
   async (
@@ -57,6 +135,39 @@ const findAll =
       .send();
   };
 
+/**
+ * @api {get} /api/v1/users/:id Get a user
+ * @apiVersion 0.0.1
+ * @apiName GetAUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {Boolean} status Success status.
+ * @apiSuccess {String} message Response message.
+ * @apiSuccess {Object} data Response data.
+ * @apiSuccess {Object} data[users]
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "status": true,
+ *      "message": "Successfully get a user.",
+ *      "data": {
+ *        "users": {}
+ *      }
+ *    }
+ *
+ * @apiError {Boolean} status Success status.
+ * @apiError {String} message Response message.
+ *
+ * @apiErrorExample NotFoundError-Response:
+ *    HTTP/1.1 404 OK
+ *    {
+ *      "status": false,
+ *      "message": "User with inputed ID not found."
+ *    }
+ */
 const findOne =
   (service: UserService) =>
   async (
@@ -80,6 +191,55 @@ const findOne =
       .send();
   };
 
+/**
+ * @api {put} /api/v1/users/:id Update a user
+ * @apiVersion 0.0.1
+ * @apiName UpdateAUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiBody {String} name The new user name.
+ * @apiBody {String} email The new user email.
+ * @apiBody {String} password The new user password.
+ *
+ * @apiSuccess {Boolean} status Success status.
+ * @apiSuccess {String} message Response message.
+ * @apiSuccess {Object} data Response data.
+ * @apiSuccess {Object} data[users]
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "status": true,
+ *      "message": "Successfully update a user.",
+ *      "data": {
+ *        "users": {}
+ *      }
+ *    }
+ *
+ * @apiError {Boolean} status Success status.
+ * @apiError {String} message Response message.
+ * @apiError {Object} [data] Error data.
+ * @apiError {String[]} data[errors]
+ *
+ * @apiErrorExample Error-Response:
+ *    HTTP/1.1 400 OK
+ *    {
+ *      "status": false,
+ *      "message": "Params doesn't match requirements.",
+ *      "data": {
+ *        "errors": []
+ *      }
+ *    }
+ *
+ * @apiErrorExample NotFoundError-Response:
+ *    HTTP/1.1 404 OK
+ *    {
+ *      "status": false,
+ *      "message": "User with inputed ID not found."
+ *    }
+ */
 const update =
   (service: UserService) =>
   async (
@@ -105,6 +265,39 @@ const update =
       .send();
   };
 
+/**
+ * @api {delete} /api/v1/users/:id Remove a user
+ * @apiVersion 0.0.1
+ * @apiName RemoveAUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {Boolean} status Success status.
+ * @apiSuccess {String} message Response message.
+ * @apiSuccess {Object} data Response data.
+ * @apiSuccess {Object} data[users]
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "status": true,
+ *      "message": "Successfully remove a user.",
+ *      "data": {
+ *        "users": {}
+ *      }
+ *    }
+ *
+ * @apiError {Boolean} status Success status.
+ * @apiError {String} message Response message.
+ *
+ * @apiErrorExample NotFoundError-Response:
+ *    HTTP/1.1 404 OK
+ *    {
+ *      "status": false,
+ *      "message": "User with inputed ID not found."
+ *    }
+ */
 const remove =
   (service: UserService) =>
   async (
@@ -130,7 +323,7 @@ const remove =
   };
 
 export const newUserHttpHandler = (service: UserService): [string, Router] => {
-  const prefix = '/users';
+  const prefix = '/api/v1/users';
   const router = Router();
 
   router.post('/', create(service));

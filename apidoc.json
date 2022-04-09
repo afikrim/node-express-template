@@ -1,0 +1,16 @@
+{
+  "name": "API Doc Example",
+  "version": "0.0.1",
+  "description": "Example documentation with APIDoc",
+  "title": "Node Express Template",
+  "url": "https://example.com",
+  "sampleUrl": "http://localhost:8080",
+  "order": [
+    "User",
+    "CreateUser",
+    "GetAllUsers",
+    "GetAUser",
+    "UpdateAUser",
+    "RemoveAUser"
+  ]
+}

@@ -7,8 +7,11 @@
     "start": "node dist/cmd/http",
     "start:dev": "nodemon src/cmd/http.ts",
     "build": "tsc -P ./tsconfig.build.json",
+    "build:docs": "apidoc -c apidoc.json -t docs/template -i src/internal/handlers/http -o docs/out",
     "lint": "eslint --fix --quiet ./src/**/*.ts",
-    "format": "prettier --write ./src/**/*.ts"
+    "format": "prettier --write ./src/**/*.ts",
+    "prebuild": "rimraf dist",
+    "prebuild:docs": "rimraf docs/out"
   },
   "keywords": [],
   "author": "",
@@ -22,11 +25,13 @@
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
+    "apidoc": "^0.29.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.5.0",
     "tsconfig-paths": "^3.12.0"
   },
