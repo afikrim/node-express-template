@@ -11,7 +11,8 @@
     "lint": "eslint --fix --quiet ./src/**/*.ts",
     "format": "prettier --write ./src/**/*.ts",
     "prebuild": "rimraf dist",
-    "prebuild:docs": "rimraf docs/out"
+    "prebuild:docs": "rimraf docs/out",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,8 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
