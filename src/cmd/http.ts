@@ -21,7 +21,7 @@ const loadEnvVars = (): Error | null => {
   config({ path: defaultEnvPath });
   if (existsSync(localEnvPath)) {
     log('Loading env variables from local .env path', loadEnvVars.name);
-    config({ path: localEnvPath });
+    config({ path: localEnvPath, override: true });
   }
 
   return null;
