@@ -4,4 +4,5 @@ module.exports = {
     (filenames) => 'npx prettier --write ' + filenames.join(' '),
     () => 'npm run build -- --noEmit',
   ],
+  'src/internal/handlers/http/**/*.ts': [() => 'npm run build:docs'],
 };
