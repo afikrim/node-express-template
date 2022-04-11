@@ -8,8 +8,10 @@ RUN npm ci
 RUN npm run build
 RUN npm run build:docs
 
+RUN rm -rf src
 RUN rm -rf node_modules
 RUN npm ci --only=production
+RUN npm install -g pm2
 
 EXPOSE 8080
-CMD [ "node", "dist/cmd/http.js" ]
+CMD [ "pm2-runtime", "ecosystem.config.js" ]

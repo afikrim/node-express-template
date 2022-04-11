@@ -6,10 +6,12 @@
   "scripts": {
     "start": "node dist/cmd/http",
     "start:dev": "nodemon src/cmd/http.ts",
+    "start:pm2": "pm2 start",
     "build": "tsc -p tsconfig.build.json",
     "build:docs": "apidoc -c apidoc.json -t docs/template -i src/internal/handlers/http -o docs/out",
     "lint": "eslint --fix --quiet ./src/**/*.ts",
     "format": "prettier --write ./src/**/*.ts",
+    "prestart:pm2": "npm run build",
     "prebuild": "rimraf dist",
     "prebuild:docs": "rimraf docs/out",
     "prepare": "husky install"
@@ -46,6 +48,7 @@
     "knex": "^1.0.3",
     "moment": "^2.29.2",
     "mysql2": "^2.3.3",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "pm2": "^5.2.0"
   }
 }
